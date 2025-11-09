@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane stylesheets="@../css/estilos.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainViewController">
+   <center>
+      <VBox prefHeight="556.0" prefWidth="853.0" spacing="5.0">
+         <children>
+            <StackPane fx:id="stackPane">
+               <children>
+                  <MenuButton fx:id="ruler" mnemonicParsing="false" styleClass="ruler" stylesheets="@../css/mainStyle.css" visible="false">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#RotateRuler" text="Rotate" />
+        </items>
+      </MenuButton>
+      
+                  <MenuButton fx:id="protractor" mnemonicParsing="false" prefHeight="486.0" prefWidth="504.0" styleClass="protractor" stylesheets="@../css/mainStyle.css" visible="false" />
+                  
+                 
+                  <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#showPosition" onMousePressed="#addPoi" pannable="true" prefWidth="358.0" vbarPolicy="ALWAYS">
+                     <content>
+                        <Pane fx:id="paneMap">
+                           <children>
+                              <ImageView fx:id="toolField" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../resources/carta_nautica.jpg" />
+                                 </image>
+                              </ImageView>
+                              <MenuButton fx:id="map_pin" mnemonicParsing="false" prefHeight="60.0" prefWidth="48.0" visible="false">
+                                 <items>
+                                    <MenuItem fx:id="pin_info" mnemonicParsing="false" text="Details" />
+                                    <MenuItem mnemonicParsing="false" text="Edit" />
+                                    <MenuItem mnemonicParsing="false" text="Delete" />
+                                 </items>
+                                 <styleClass>
+                                    <String fx:value="menu-button" />
+                                    <String fx:value="map-pin" />
+                                 </styleClass>
+                              </MenuButton>
+                           </children>
+                        </Pane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </StackPane>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </center>
+   <top>
+      <VBox spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar styleClass="modern-menu">
+              <menus>
+                <Menu mnemonicParsing="false" text="User">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleCheckProgress" text="Check Progress" />
+                    <MenuItem mnemonicParsing="false" onAction="#modifyProfile" text="Modify Profile" />
+                    <MenuItem mnemonicParsing="false" onAction="#logout" text="Logout" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Tools">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#clear" text="Clear Map" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="control-bar">
+               <children>
+                  <Label styleClass="control-label" text="Zoom:" />
+                  <Button mnemonicParsing="false" onAction="#zoomOut" styleClass="zoom-button" text="-">
+                     <tooltip>
+                        <Tooltip text="Zoom Out" />
+                     </tooltip>
+                  </Button>
+                  <Slider fx:id="zoom_slider" prefHeight="14.0" prefWidth="112.0" styleClass="modern-slider" />
+                  <Button mnemonicParsing="false" onAction="#zoomIn" styleClass="zoom-button" text="+">
+                     <tooltip>
+                        <Tooltip text="Zoom In" />
+                     </tooltip>
+                  </Button>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Label fx:id="usernameMain">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="pfpMain" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="status-bar" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="mousePosition" styleClass="status-text" text="Position: X: 0, Y: 0" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#handleSaveSession" text="Save Session" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <left>
+      <HBox fx:id="exercisesHbox" BorderPane.alignment="CENTER">
+         <children>
+            <TitledPane fx:id="exercisesTitledPane" text="Exercises">
+               <content>
+                  <VBox prefHeight="556.0" prefWidth="250.0" spacing="5.0" styleClass="sidebar">
+                     <children>
+                        <VBox spacing="10.0" styleClass="sidebar-header">
+                           <children>
+                              <Label styleClass="sidebar-title" text="Exercises" />
+                              <HBox spacing="10.0">
+                                 <children>
+                                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#handleRandomExercise" styleClass="action-button" text="Random" HBox.hgrow="ALWAYS">
+                                       <tooltip>
+                                          <Tooltip text="Select a random exercise" />
+                                       </tooltip>
+                                    </Button>
+                                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#handleBrowseButton" styleClass="action-button" text="Browse..." HBox.hgrow="ALWAYS">
+                                       <tooltip>
+                                          <Tooltip text="Browse available exercises" />
+                                       </tooltip>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Separator />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                        <Label fx:id="questionLabel">
+                           <VBox.margin>
+                              <Insets left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ListView fx:id="answerListView" prefHeight="407.0" prefWidth="235.0">
+                           <VBox.margin>
+                              <Insets bottom="1.0" left="5.0" top="5.0" />
+                           </VBox.margin>
+                        </ListView>
+                        <Button mnemonicParsing="false" onAction="#handleAnswerSubmition" prefHeight="25.0" prefWidth="238.0" text="submit answer">
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </TitledPane>
+         </children>
+      </HBox>
+   </left>
+   <right>
+      <ToolBar orientation="VERTICAL" prefHeight="556.0" prefWidth="80.0" styleClass="tool-sidebar" BorderPane.alignment="CENTER">
+        <items>
+            <ToggleButton mnemonicParsing="false" onAction="#moveGraph" selected="true" styleClass="tool-button">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/hand.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <toggleGroup>
+                  <ToggleGroup fx:id="toolBarGroup" />
+               </toggleGroup>
+               <tooltip>
+                  <Tooltip text="Pan Tool" />
+               </tooltip>
+            </ToggleButton>
+            <ColorPicker editable="true" onAction="#choseColor" prefHeight="50.0" prefWidth="57.0" styleClass="tool-button">
+               <value>
+                  <Color red="0.07894736528396606" green="0.07785087823867798" blue="0.07785087823867798" />
+               </value>
+            </ColorPicker>
+            <MenuButton mnemonicParsing="false" prefHeight="46.0" prefWidth="58.0" styleClass="tool-button">
+              <items>
+                <MenuItem fx:id="thin" mnemonicParsing="false" onAction="#setThinLineThickness">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/thin.jpg" />
+                           </image></ImageView>
+                     </graphic>
+                  </MenuItem>
+                <MenuItem fx:id="medium" mnemonicParsing="false" onAction="#setMediumLineThickness">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/medium.jpg" />
+                           </image></ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="fat" mnemonicParsing="false" onAction="#setFatLineThickness">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/fat.jpg" />
+                           </image></ImageView>
+                     </graphic>
+                  </MenuItem>
+              </items>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/line_thickness_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuButton>
+            <Separator />
+            <ToggleButton mnemonicParsing="false" onAction="#drawPoint" styleClass="tool-button" toggleGroup="$toolBarGroup">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/pin.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Add Point" />
+               </tooltip>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" onAction="#drawLine" styleClass="tool-button" toggleGroup="$toolBarGroup">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Draw Line" />
+               </tooltip>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" onAction="#drawCircle" styleClass="tool-button" toggleGroup="$toolBarGroup">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/compass.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Draw Circle" />
+               </tooltip>
+            </ToggleButton>
+            <Separator />
+            <ToggleButton mnemonicParsing="false" onAction="#insertText" styleClass="tool-button" toggleGroup="$toolBarGroup">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/text.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Add Text" />
+               </tooltip>
+            </ToggleButton>
+            <Separator />
+            <ToggleButton fx:id="rulerToggleButton" mnemonicParsing="false" onAction="#showRuler" styleClass="tool-button">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/ruler_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Ruler Tool" />
+               </tooltip>
+            </ToggleButton>
+            <ToggleButton fx:id="protractorToggleButton" mnemonicParsing="false" onAction="#showProtractor" styleClass="tool-button">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/protractor_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Protractor Tool" />
+               </tooltip>
+            </ToggleButton>
+        </items>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </ToolBar>
+   </right>
+</BorderPane>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane prefHeight="550" prefWidth="420" styleClass="profile-container" stylesheets="@../css/modStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModifyProfileController">
+    
+    <!-- Header -->
+    <top>
+        <VBox alignment="TOP_CENTER" spacing="0" styleClass="header-container">
+            <HBox alignment="TOP_RIGHT" styleClass="close-button-container">
+                <Button fx:id="closeButton" onAction="#cancel" styleClass="close-button" text="×">
+                    <tooltip>
+                        <Tooltip text="Close" />
+                    </tooltip>
+                </Button>
+            </HBox>
+            
+            <StackPane styleClass="profile-image-container">
+                <!-- Use a StackPane to properly clip the image -->
+                <Circle fill="white" radius="50" stroke="#e0e0e0" strokeWidth="1" />
+                <ImageView fx:id="profilePicture" fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true" />
+                <Button fx:id="editPhotoButton" onAction="#uploadProfilePicture" styleClass="edit-photo-button" text="+">
+                    <tooltip>
+                        <Tooltip text="Change profile picture" />
+                    </tooltip>
+                </Button>
+            </StackPane>
+            
+            <Label fx:id="usernameLabel" styleClass="username-label" text="ADMIN" />
+            <Label styleClass="edit-profile-label" text="Edit Profile" />
+        </VBox>
+    </top>
+
+    <!-- Content -->
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20" styleClass="content-container">
+            <VBox styleClass="field-container">
+                <Label styleClass="field-label" text="Password" />
+                <PasswordField fx:id="passwordField" promptText="Enter your new password..." styleClass="input-field" />
+            </VBox>
+            
+            <VBox styleClass="field-container">
+                <Label styleClass="field-label" text="Confirm Password" />
+                <PasswordField fx:id="confirmPasswordField" promptText="Confirm your new password..." styleClass="input-field" />
+            </VBox>
+            
+            <VBox styleClass="field-container">
+                <Label styleClass="field-label" text="Email" />
+                <TextField fx:id="emailField" promptText="Enter your new email..." styleClass="input-field" />
+            </VBox>
+            
+            <VBox styleClass="field-container">
+                <Label styleClass="field-label" text="Date of Birth" />
+                <DatePicker fx:id="dobPicker" promptText="Select the new date of birth value..." styleClass="date-picker" />
+            </VBox>
+            
+            <Separator styleClass="section-separator" />
+            
+            <HBox alignment="CENTER" spacing="10" styleClass="notification-container">
+                <Label fx:id="profileModStat" styleClass="status-message" text="Profile saved successfully!" visible="false" />
+            </HBox>
+        </VBox>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox alignment="CENTER" spacing="15" styleClass="button-container">
+            <Button fx:id="cancelButton" onAction="#cancel" styleClass="secondary-button" text="Cancel" />
+            <Button fx:id="saveButton" onAction="#saveProfile" styleClass="primary-button" text="Save Changes" />
+        </HBox>
+    </bottom>
+</BorderPane>

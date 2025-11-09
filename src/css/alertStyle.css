@@ -1,0 +1,99 @@
+/* 
+    Created on : 22 may 2025, 17:26:51
+    Author     : MSIMONI
+*/
+
+/*
+    UPDATE:     31 may 2025
+    CONTENT:    Made the design a bit more minimalistic so it fits the rest of the application
+    AUTHOR:     NECRO
+*/
+
+.myAlert {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+}
+
+.myAlert:header .header-panel {
+    -fx-background-color: #3498db;
+    -fx-background-radius: 8px 8px 0 0;
+    -fx-padding: 15px 15px 15px 15px;
+}
+
+.myAlert:header .header-panel .label {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.myAlert .label.content {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    -fx-padding: 10px 0px 0px 0px;
+    -fx-text-fill: #2c3e50;
+}
+
+.myAlert .button-bar .container {
+    -fx-background-color: #ffffff;
+    -fx-padding: 15px;
+    -fx-background-radius: 0 0 8px 8px;
+}
+
+.myAlert .button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 110px;
+    -fx-pref-height: 32px;
+    -fx-cursor: hand;
+    -fx-padding: 8px 16px;
+    -fx-effect: none;
+    -fx-transition: -fx-background-color 0.2s;
+}
+
+.myAlert .button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.myAlert .button:pressed {
+    -fx-background-color: #1f6aa5;
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.2), 1, 0, 0, 1);
+}
+
+.myAlert .button.cancel-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #3498db;
+    -fx-border-color: #3498db;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.myAlert .button.cancel-button:hover {
+    -fx-background-color: rgba(52, 152, 219, 0.1);
+}
+
+.myAlert .button.cancel-button:pressed {
+    -fx-background-color: rgba(52, 152, 219, 0.2);
+}
+
+/* Dialog pane styling */
+.myAlert > *.content.label {
+    -fx-padding: 15px 15px 0px 15px;
+}
+
+.myAlert .dialog-pane {
+    -fx-padding: 0;
+}
+
+.myAlert .dialog-pane > *.expandable-content {
+    -fx-padding: 15px;
+}
+
+.myAlert .dialog-pane > *.button-bar > *.container {
+    -fx-padding: 15px;
+}

@@ -1,0 +1,68 @@
+
+.register-pane {
+    -fx-background-color: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+}
+
+.content-pane {
+    -fx-padding: 20px;
+    -fx-background-color: transparent;
+    -fx-spacing: 5px;
+}
+
+.label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.text-input, .password-input {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #dcdde1;
+    -fx-border-radius: 8px;
+    -fx-padding: 8px;
+    -fx-prompt-text-fill: #95a5a6;
+}
+
+.text-input:focused{
+    -fx-border-color: #3498db;
+    -fx-effect: dropshadow(gaussian, rgba(52,152,219,0.2), 6, 0, 0, 2);
+}
+
+.error-text {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 12px;
+}
+
+#succesfulRegistered {
+    -fx-text-fill: #00c853;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+#avatarButton {
+    -fx-font-size: 14px;
+    -fx-padding: 8px 12px;
+    -fx-text-fill: white;
+    -fx-background-radius: 6px;
+    -fx-background-color: #7f8c8d;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+#registerButton {
+    -fx-font-size: 16px;
+    -fx-padding: 12px 40px;
+    -fx-background-radius: 8px;
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+#registerButton:hover {
+    -fx-background-color: #2980b9;
+}
+#registerButton:pressed {
+    -fx-background-color: #1c6ea4;
+}
